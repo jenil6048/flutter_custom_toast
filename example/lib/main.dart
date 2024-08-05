@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_custom_toast/export.dart';
+import 'package:custom_flutter_toast/export.dart';
 import 'package:flutter/services.dart';
 
 /// The navigator key to be used throughout the app.
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       builder: flutterToastBuilder(), // Use the custom toast builder
       navigatorKey: navigatorKey, // Set the navigator key
       home: const HomeScreen(),
@@ -50,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
       if (useNativeToast) {
         await _nativeToastPlugin.showToast(
           message: message,
+          backgroundColor: Colors.red,
+          maxLines: 6,
+          gravity: ToastGravity.bottom,
+          textColor: Colors.white,
           fontSize: 16,
           showImage: withImage,
           imagePath: "assets/car_image.jpeg",

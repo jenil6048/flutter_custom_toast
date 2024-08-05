@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_custom_toast:
+  custom_flutter_toast:
     # When depending on this package from a real application you should use:
     #   flutter_custom_toast: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

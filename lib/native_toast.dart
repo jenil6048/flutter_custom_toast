@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_custom_toast/src/flutter_toast.dart';
+import 'package:custom_flutter_toast/src/flutter_toast.dart';
 
 class NativeToast {
   final methodChannel = const MethodChannel('flutter_toast_plugin');

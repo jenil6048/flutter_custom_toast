@@ -1,6 +1,6 @@
-name: flutter_custom_toast
+name: custom_flutter_toast
 description: "A customizable toast message library for displaying brief notifications with flexible styling options in your application."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/jenil6048/flutter_custom_toast.git
 
 environment:
