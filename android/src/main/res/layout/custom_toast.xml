@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/custom_toast_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/toast_background"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/toast_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        app:strokeColor="@null"
+        android:src="@drawable/toast_background"
+        app:layout_constraintEnd_toStartOf="@+id/imvCornerRadiusWithStroke"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toast_message"
+        app:shapeAppearanceOverlay="@style/RoundedSquare"
+        card_view:ignore="MissingClass" />
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:elevation="0dp"-->
+<!--        android:scrollbarTrackHorizontal="@drawable/toast_background"-->
+<!--        app:cardCornerRadius="8dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardUseCompatPadding="false"-->
+<!--        app:contentPadding="0dp"-->
+<!--        card_view:cardCornerRadius="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/toast_image"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:background="@drawable/circle_background"-->
+<!--            android:contentDescription="@string/todo1"-->
+<!--            android:radius="10dp"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:visibility="gone" /> &lt;!&ndash; Initially set to gone &ndash;&gt;-->
+<!--    </com.google.android.material.card.MaterialCardView>-->
+
+
+
+
+    <TextView
+        android:id="@+id/toast_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16sp" />
+</LinearLayout>
