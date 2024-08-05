@@ -1,5 +1,5 @@
 
-# [fluttertoast](https://pub.dev/packages/flutter_custom_toast)
+# [flutter_custom_toast](https://pub.dev/packages/flutter_custom_toast)
 
 Toast Library for Flutter
 
@@ -12,7 +12,6 @@ Now this toast library supports two kinds of toast messages one which requires `
 >
 > - Android
 > - IOS
-> - Web (Uses [Toastify-JS](https://github.com/apvarun/toastify-js))
 
 This one has limited features and no control over UI
 
@@ -33,53 +32,42 @@ This one has limited features and no control over UI
 
 ```yaml
 # add this line to your dependencies
-fluttertoast: ^8.2.6
+flutter_custom_toast: ^0.0.1
 ```
 
 ```dart
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_custom_toast/export.dart';
 ```
 
 ## Toast with No Build Context (Android & iOS)
 
 ```dart
-Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+final _nativeToastPlugin = NativeToast();
+
+
+await _nativeToastPlugin.showToast(
+          message: message,
+          backgroundColor: Colors.red,
+          maxLines: 6,
+          gravity: ToastGravity.bottom,
+          textColor: Colors.white,
+          fontSize: 16,
+          showImage: withImage,
+          imagePath: "assets/car_image.jpeg",
+        );
 ```
 
 | property        | description                                                        | default    |
 | --------------- | ------------------------------------------------------------------ |------------|
 | msg             | String (Not Null)(required)                                        |required    |
-| toastLength     | Toast.LENGTH_SHORT or Toast.LENGTH_LONG (optional)                 |Toast.LENGTH_SHORT  |
-| gravity         | ToastGravity.TOP (or) ToastGravity.CENTER (or) ToastGravity.BOTTOM (Web Only supports top, bottom) | ToastGravity.BOTTOM    |
-| timeInSecForIosWeb | int (for ios & web)                                                 | 1  (sec)     |
+| toastLength     | Toast.LENGTH_SHORT or Toast.LENGTH_LONG (optional)                 |Toast.LENGTH_LONG  |
+| gravity         | ToastGravity.TOP (or) ToastGravity.CENTER (or) ToastGravity.BOTTOM | ToastGravity.BOTTOM    |
 | backgroundColor         | Colors.red                                                         |null   |
 | textcolor       | Colors.white                                                       |null    |
 | fontSize        | 16.0 (float)                                                       | null      |
-| webShowClose    | false (bool)                                                       | false      |
-| webBgColor      | String (hex Color)                                                 | linear-gradient(to right, #00b09b, #96c93d) |
-| webPosition     | String (`left`, `center` or `right`)                                | right     |
-
-### To cancel all the toasts call
-
-```dart
-Fluttertoast.cancel()
-```
-
-### Note Android
-
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/toast_deprecated_setview.png" height="200px" />
-
-
-> Custom Toast will not work on android 11 and above, it will only use *msg* and *toastLength* remaining all properties are ignored
-
+| imagePath       | uploade image your asset folder and give the name like this :- "assets/car_image.jpeg"  | flutter_logo |
+| showImage       | to show or hide image from toast message                           | true |
+| maxLines        | Give toast message max line                                        | 2 |
 
 ### Custom Toast For Android
 
@@ -116,8 +104,14 @@ Create a file named `toast_custom.xml` in your project `app/res/layout` folder a
 Update your `MaterialApp` with `builder` like below for the use of Context globally check doc section Use NavigatorKey for Context(to access context globally)
 
 ```dart
+
+///Globle 
+/// The navigator key to be used throughout the app.
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+
 MaterialApp(
-    builder: FToastBuilder(),
+    builder: flutterToastBuilder(),
     home: MyApp(),
     navigatorKey: navigatorKey,
 ),
@@ -134,56 +128,30 @@ void initState() {
     fToast.init(context);
 }
 
-_showToast() {
-    Widget toast = Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
-        color: Colors.greenAccent,
-        ),
-        child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-            Icon(Icons.check),
-            SizedBox(
-            width: 12.0,
-            ),
-            Text("This is a Custom Toast"),
-        ],
-        ),
-    );
+ final _flutterToast = FlutterToast();
 
-
-    fToast.showToast(
-        child: toast,
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
-    );
-    
-    // Custom Toast Position
-    fToast.showToast(
-        child: toast,
-        toastDuration: Duration(seconds: 2),
-        positionedToastBuilder: (context, child) {
-          return Positioned(
-            child: child,
-            top: 16.0,
-            left: 16.0,
-          );
-        });
-}
+ _flutterToast.showCustomToast(
+          message,
+          navigatorKey: navigatorKey,
+          maxLines: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          imagePath: "assets/car_image.jpeg",
+          showImage: withImage,
+        );
 
 ```  
 
-Now Call `_showToast()`
 
 For more details check `example` project
 
 | property        | description                                                        | default    |
 | --------------- | ------------------------------------------------------------------ |------------|
-| child             | Widget (Not Null)(required)                                        |required    |
+| child             | Widget (optional)                                        |    |
 | toastDuration     | Duration (optional)                                                 |  |
 | gravity         | ToastGravity.*    |  |
+| NavigatorKey        | GlobalKey<NavigatorState>        |required|
+|Message|        message   |required|
 
 ### Use NavigatorKey for Context(to access context globally)
 
@@ -193,40 +161,18 @@ To use NavigatorKey for Context first define the `GlobalKey<NavigatorState>` at 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 ```
 
-At the time of initializing the `FToast` we need to use context from globally defined `GlobalKey<NavigatorState>`
-
-```dart
-FToast fToast = FToast();
-fToast.init(yourNavKey.currentContext!);
-```
-
-### To cancel all the toasts call
-
-```dart  
-// To remove present shwoing toast
-fToast.removeCustomToast()
-
-// To clear the queue
-fToast.removeQueuedCustomToasts();
-```  
 
 ## Preview Images (No BuildContext)
 
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/1.png" width="320px" />
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/2.png" width="320px" />
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/3.png" width="320px" />
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/4.png" width="320px" />
+<img src="https://raw.githubusercontent.com/jenil6048/flutter_custom_toast/main/screenshot/1.png" width="320px" />
+<img src="https://raw.githubusercontent.com/jenil6048/flutter_custom_toast/main/screenshot/2.png" width="320px" />
 
 ## Preview Images (BuildContext)
 
-<img src="https://raw.githubusercontent.com/ponnamkarthik/FlutterToast/master/screenshot/11.jpg" width="320px" />
+<img src="https://raw.githubusercontent.com/jenil6048/flutter_custom_toast/main/screenshot/3.png" width="320px" />
+<img src="https://raw.githubusercontent.com/jenil6048/flutter_custom_toast/main/screenshot/4.png" width="320px" />
 
 
 ## If you need any features suggest
 
 ...
-
-
-## Buy Me a Coffee
-
-<a href="https://www.buymeacoffee.com/karthikponnam" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
