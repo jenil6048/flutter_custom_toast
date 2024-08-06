@@ -7,7 +7,7 @@
     android:background="@drawable/toast_background"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="6dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/toast_image"

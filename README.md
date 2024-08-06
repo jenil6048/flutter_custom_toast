@@ -1,5 +1,5 @@
 
-# [flutter_custom_toast](https://pub.dev/packages/flutter_custom_toast)
+# [custom_flutter_toast](https://pub.dev/packages/flutter_custom_toast)
 
 Toast Library for Flutter
 

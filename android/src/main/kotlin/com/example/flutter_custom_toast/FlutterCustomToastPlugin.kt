@@ -126,7 +126,7 @@ class FlutterCustomToastPlugin: FlutterPlugin, MethodCallHandler {
     }
 
     backgroundColor?.let {
-      val radius = 16f // You can adjust this as needed
+      val radius = 24f
       val drawable = ShapeDrawable(
         RoundRectShape(
           floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null
