@@ -5,7 +5,7 @@ public class FlutterCustomToastPlugin: NSObject, FlutterPlugin {
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_toast_plugin", binaryMessenger: registrar.messenger())
-        let instance = Untitled7Plugin()
+        let instance = FlutterCustomToastPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
 
