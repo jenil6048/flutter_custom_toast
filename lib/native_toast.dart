@@ -33,7 +33,9 @@ class NativeToast {
         log("Error to load image--->$imagePath");
       }
     }
-    print(" backgroundColor?.value ${backgroundColor?.value}");
+    if (kDebugMode) {
+      print(" backgroundColor?.value ${backgroundColor?.value}");
+    }
     final data = {
       'message': message,
       'textColor': textColor?.value,

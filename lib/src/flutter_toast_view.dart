@@ -33,7 +33,6 @@ class FlutterToastView extends StatefulWidget {
   final int maxLines;
 
   const FlutterToastView({
-    super.key,
     required this.message,
     required this.textColor,
     required this.fontSize,

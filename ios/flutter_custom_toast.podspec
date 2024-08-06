@@ -3,8 +3,8 @@
 # Run `pod lib lint flutter_custom_toast.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_custom_toast'
-  s.version          = '0.0.1'
+  s.name             = 'custom_flutter_toast'
+  s.version          = '0.0.5'
   s.summary          = 'A new Flutter project.'
   s.description      = <<-DESC
 A new Flutter project.
